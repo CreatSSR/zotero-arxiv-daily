@@ -61,10 +61,7 @@ def get_arxiv_paper(query:str, debug:bool=False) -> list[ArxivPaper]:
 
             # 给每篇论文打上标签
             for paper in batch:
-                if 'cs.' in paper.category:  # 根据分类为论文添加标签
-                    paper.tag = paper.category  # 例如，添加 'cs.HC'
-                else:
-                    paper.tag = 'General'  # 其他类别的默认标签
+                paper.tag = query #ARXIV_QUERY
 
             
             bar.update(len(batch))
