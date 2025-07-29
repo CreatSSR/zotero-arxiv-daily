@@ -58,6 +58,7 @@ def get_arxiv_paper(query:str, debug:bool=False) -> list[ArxivPaper]:
         for i in range(0,len(all_paper_ids),50):
             search = arxiv.Search(id_list=all_paper_ids[i:i+50])
             batch = [ArxivPaper(p, tag=query) for p in client.results(search)]
+            print(f"当前使用的 arxiv_query: {query}")
 
             
             bar.update(len(batch))
@@ -145,6 +146,7 @@ if __name__ == '__main__':
     )
     parser.add_argument('--debug', action='store_true', help='Debug mode')
     args = parser.parse_args()
+    print(f"当前使用的 arxiv_query(from main): {args.arxiv_query}")
     assert (
         not args.use_llm_api or args.openai_api_key is not None
     )  # If use_llm_api is True, openai_api_key must be provided
