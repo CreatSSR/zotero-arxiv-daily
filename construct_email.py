@@ -68,6 +68,11 @@ def get_block_html(title:str, authors:str, rate:str,arxiv_id:str, abstract:str, 
         </td>
     </tr>
     <tr>
+        <td style="font-size: 14px; color: #333; padding: 8px 0;">
+            <strong>Query:</strong> {arxiv_id}
+        </td>
+    </tr>
+    <tr>
         <td style="font-size: 14px; color: #666; padding: 8px 0;">
             {authors}
             <br>
@@ -117,17 +122,12 @@ def get_stars(score:float):
         return '<div class="star-wrapper">'+full_star * full_star_num + half_star * half_star_num + '</div>'
 
 
-def render_email(papers:list[ArxivPaper], arxiv_query:str):
-    # 使用查询参数格式化 HTML 框架
-    html_template = framework.replace('{arxiv_query}', arxiv_query)
-    
-    if len(papers) == 0 :
-        return html_template.replace('__CONTENT__', get_empty_html())
+def render_email(papers:list[ArxivPaper]):
 
   
     parts = []
-    # if len(papers) == 0 :
-    #     return framework.replace('__CONTENT__', get_empty_html())
+    if len(papers) == 0 :
+        return framework.replace('__CONTENT__', get_empty_html())
     
     for p in tqdm(papers,desc='Rendering Email'):
         rate = get_stars(p.score)
@@ -144,7 +144,7 @@ def render_email(papers:list[ArxivPaper], arxiv_query:str):
             affiliations = 'Unknown Affiliation'
         
         # 将标签信息添加到生成的块中
-        parts.append(get_block_html(p.title, authors, rate, p.arxiv_id, p.tldr, p.pdf_url, p.code_url, affiliations))
+        parts.append(get_block_html(p.title, p.tag, authors, rate, p.arxiv_id, p.tldr, p.pdf_url, p.code_url, affiliations))
         # parts.append(get_block_html(p.title, authors,rate,p.arxiv_id ,p.tldr, p.pdf_url, p.code_url, affiliations))
 
     content = '<br>' + '</br><br>'.join(parts) + '</br>'
