@@ -135,7 +135,13 @@ def render_email(papers:list[ArxivPaper]):
                 affiliations += ', ...'
         else:
             affiliations = 'Unknown Affiliation'
-        parts.append(get_block_html(p.title, authors,rate,p.arxiv_id ,p.tldr, p.pdf_url, p.code_url, affiliations))
+
+        # 添加标签信息
+        tag_info = f"<p>Tag: {p.tag}</p>" if hasattr(p, 'tag') else "<p>Tag: Unknown</p>"
+        
+        # 将标签信息添加到生成的块中
+        parts.append(get_block_html(p.title, authors, rate, p.arxiv_id, p.tldr, p.pdf_url, p.code_url, affiliations) + tag_info)
+        # parts.append(get_block_html(p.title, authors,rate,p.arxiv_id ,p.tldr, p.pdf_url, p.code_url, affiliations))
 
     content = '<br>' + '</br><br>'.join(parts) + '</br>'
     return framework.replace('__CONTENT__', content)
