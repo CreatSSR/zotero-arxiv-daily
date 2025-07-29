@@ -17,6 +17,7 @@ class ArxivPaper:
     def __init__(self,paper:arxiv.Result):
         self._paper = paper
         self.score = None
+        self.tag = tag  # 添加 tag 属性
     
     @property
     def title(self) -> str:
