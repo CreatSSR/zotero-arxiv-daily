@@ -18,9 +18,9 @@ class ArxivPaper:
         self._paper = paper
         self.score = None
         self.tag = tag  # 添加 tag 属性
-    # @property
-    # def tag(self) -> str:
-    #     return self._paper.tag
+    @property
+    def tag(self) -> str:
+        return self._paper.tag
     
     @property
     def title(self) -> str:
