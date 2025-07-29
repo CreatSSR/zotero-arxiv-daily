@@ -14,7 +14,7 @@ from contextlib import ExitStack
 
 
 class ArxivPaper:
-    def __init__(self,paper:arxiv.Result):
+    def __init__(self,paper:arxiv.Result, tag: str = None):
         self._paper = paper
         self.score = None
         self.tag = tag  # 添加 tag 属性
