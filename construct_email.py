@@ -69,7 +69,7 @@ def get_block_html(title:str, tag:str, authors:str, rate:str,arxiv_id:str, abstr
     </tr>
     <tr>
         <td style="font-size: 14px; color: #333; padding: 8px 0;">
-            <strong>Query:</strong> {arxiv_id}
+            <strong>Query:</strong> {tag}
         </td>
     </tr>
     <tr>
