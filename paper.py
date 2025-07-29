@@ -14,14 +14,14 @@ from contextlib import ExitStack
 
 
 class ArxivPaper:
-    def __init__(self,paper:arxiv.Result, tag: str = None):
+    def __init__(self,paper:arxiv.Result):
         self._paper = paper
         self.score = None
-        self._tag = tag  # 添加 tag 属性
+    #     self._tag = tag  # 添加 tag 属性
         
-    @property
-    def tag(self) -> str:
-        return self._tag
+    # @property
+    # def tag(self) -> str:
+    #     return self._tag
     
     @property
     def title(self) -> str:
